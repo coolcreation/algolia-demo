@@ -35,25 +35,25 @@ async function syncAlgolia() {
         return;
     }
 
-    /********************************************************************************************
-     We don't need the following search parameters code here - we can set it in Algolia dashboard: 
-     click 'Search' from the left toolbar, then click 'Configuration' on the next page 
-     - or ---->  go straight to the settings page:
-     https://dashboard.algolia.com/apps/OUR_APPLICATION_NUMBER/explorer/configuration/products/searchable-attributes
-     --------------------------------------------------------------------------------------------
 
+    // Check product attributes for correct form
     const records = products.map(p => {
+
+        // don't add product if attributes aren't correct
         if (!p || !p._id || !p.name || !p.price || !p.description) {
             console.warn(`Skipping malformed product:`, p);
-            return null;
-        }
-        return {
+            return null;               
+        } 
+
+        // add product to list if attributes are good
+        return {                    
             objectID: p._id.toString(),
             name: p.name,
             price: p.price,
             description: p.description,
             stock: p.stock
         };
+
     }).filter(record => record !== null);
 
 
@@ -67,17 +67,18 @@ async function syncAlgolia() {
     try {
         // Iterate through records and use saveObject for each
         for (const record of records) {
-            // Your test script used client.saveObject({ indexName, body: record })
-            await client.saveObject({ // Use the main 'client' object
-                indexName: ALGOLIA_INDEX_NAME, // Pass indexName as an option
-                body: record, // Pass the single record in 'body'
+
+            // Save the object to Algolia via 'products' index
+            await client.saveObject({               // Use the main 'client' object  (see line #19 above)
+                indexName: ALGOLIA_INDEX_NAME,      // Algolia index name 'products' (see line #13 above)
+                body: record,                       // Pass the single 'product' to be saved in Algolia 'products' index
             });
         }
         console.log('Products synced to Algolia!');
     } catch (error) {
         console.error('Error syncing products to Algolia:', error);
     }
-    *******************************************************************************************/
+
 
 }
 

@@ -12,11 +12,15 @@ function AdminProductsPage() {
       <div className="main-container">
         
         <h1 className='fs-4 text-center'>Admin Products Page</h1>
+
       </div>
 
       <div>
-          <Products />
+
+        <Products />
+
       </div>
+       
        
       <Footer />
     </>
