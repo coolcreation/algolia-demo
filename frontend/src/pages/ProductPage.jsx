@@ -11,8 +11,10 @@ function ProductPage() {
       
       <div className="main-container">
         
-        <h1 className='fs-4 text-center'>Product Page</h1>
-        <Searchbox />
+       <div>
+         <h1 className='fs-4 text-start ps-1 ps-lg-3'>Product Page</h1>
+         <Searchbox />
+       </div>
       </div>
         
       <Footer />

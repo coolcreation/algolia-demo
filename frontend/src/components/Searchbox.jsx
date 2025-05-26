@@ -1,4 +1,3 @@
-//  https://dashboard.algolia.com/apps/5VVBCOJ357/explorer/browse/LayeredEcommerce?searchMode=search
 //  https://www.algolia.com/doc/guides/building-search-ui/getting-started/react/
 
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
@@ -13,11 +12,6 @@ export default function Searchbox() {
 
   function Hit({ hit }) {
     return (
-        // <div className="hit">
-        // <h4>{hit.name}</h4>
-        // <p>{hit.description}</p>
-        // <p>${hit.price}</p>
-        // </div>
 
         <div className='product-card-container d-flex flex-wrap justify-content-around w-100 gap-3'>
           <div className="card bg-dark col-12">
@@ -25,7 +19,8 @@ export default function Searchbox() {
               <div class="card-body text-white">
                   <h4 className="card-title">{hit.name}</h4>
                   <p className="card-text">{hit.description}</p>
-                  <p className="card-text text-info fs-5">${hit.price}</p>
+                  <p className="card-text text-info fs-5 fw-semibold">${hit.price}</p>
+                  <p className="card-text ">qty: {hit.stock}</p>
                   <a className="btn btn-primary w-100 fw-semibold">ADD TO CART</a>
               </div>
           </div>
@@ -35,10 +30,19 @@ export default function Searchbox() {
 
   return (
     <>
-        <InstantSearch searchClient={searchClient} indexName="products">
-            <SearchBox className='search-box' placeholder='product search' />
-            <Hits hitComponent={Hit} />
-        </InstantSearch>
+      <InstantSearch searchClient={searchClient} indexName="products">
+          <SearchBox className='search-box' placeholder='product search' />
+          {/* Embed 'Hits' here to affect what is shown in real time while typing a search */}
+          <Hits hitComponent={Hit} />
+      </InstantSearch>
+
+
+      {/* The following will always display all products. Search will not affect the view: */}
+      {/* <div className="hits-container">
+          <InstantSearch searchClient={searchClient} indexName="products">
+              <Hits hitComponent={Hit}/>
+          </InstantSearch>
+      </div> */}
     </>
     
   )

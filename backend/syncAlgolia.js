@@ -35,6 +35,13 @@ async function syncAlgolia() {
         return;
     }
 
+    /********************************************************************************************
+     We don't need the following search parameters code here - we can set it in Algolia dashboard: 
+     click 'Search' from the left toolbar, then click 'Configuration' on the next page 
+     - or ---->  go straight to the settings page:
+     https://dashboard.algolia.com/apps/OUR_APPLICATION_NUMBER/explorer/configuration/products/searchable-attributes
+     --------------------------------------------------------------------------------------------
+
     const records = products.map(p => {
         if (!p || !p._id || !p.name || !p.price || !p.description) {
             console.warn(`Skipping malformed product:`, p);
@@ -45,6 +52,7 @@ async function syncAlgolia() {
             name: p.name,
             price: p.price,
             description: p.description,
+            stock: p.stock
         };
     }).filter(record => record !== null);
 
@@ -69,6 +77,8 @@ async function syncAlgolia() {
     } catch (error) {
         console.error('Error syncing products to Algolia:', error);
     }
+    *******************************************************************************************/
+
 }
 
 export default syncAlgolia;

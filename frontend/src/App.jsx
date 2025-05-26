@@ -11,6 +11,9 @@ import AboutPage from './pages/AboutPage.jsx';
 import CartPage from './pages/CartPage.jsx'
 import ContactPage from './pages/ContactPage.jsx';
 import ProductPage from './pages/ProductPage.jsx'
+// Admin Pages
+import AdminProductsPage from './admin/pages/AdminProductsPage.jsx';
+import AdminHomePage from './admin/pages/AdminHomePage';
 
 
 function App() {
@@ -24,6 +27,9 @@ function App() {
         <Route path="/CartPage" element={ <CartPage /> }/>
         <Route path="/ContactPage" element={ <ContactPage /> }/>
         <Route path="/ProductPage" element={ <ProductPage /> }/>
+
+        <Route path="/adminHomePage" element={ <AdminHomePage /> }/>
+        <Route path="/adminProductPage" element={ <AdminProductsPage /> }/>
         
       </Routes>  
     </>

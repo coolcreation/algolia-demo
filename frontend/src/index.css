@@ -40,21 +40,45 @@ body{
   padding: 15px 0;
 }
 .navbar .navbar-nav{
-  /* background: linear-gradient(180deg, #05225E 0%, #295591 100%); */
-  /* color: #fff; */
+  display: flex;
+  background: linear-gradient(180deg, #05225E 0%, #295591 100%);  
+  margin: 0;
+}
+.navbar .navbar-nav .nav-item{
+  display: flex;
+  margin: 0 0 0 2rem;
+  justify-content: flex-start;
+  width: 100%;
+  padding: .2rem;
+}
+.navbar .navbar-nav .nav-item .nav-link, .cart-icon{
+  color: white;
+  fill: white !important;
 }
 
 .nav-brand img{
   width: 75px;
 }
+.cart-icon{
+  fill: var(--primary);
+  width: 30px;
+  height: 30px;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.admin-icon-container{
+  top: 24px;
+  right: 80px;
+}
+
 
 /** Since we are not using BS5 anchor tags we need a way for hover effect, 
  ** React Link doesn't provide hover effect, so we make our own! */
 .link{
-  color: var(--nav-link-color)
+  color: var(--black)
 }
-.link:hover{
-  color: var(--hover-link-color) !important;
+.link:hover {
+  color: var(--primary) !important;
 }
 
 
@@ -63,16 +87,25 @@ body{
 .main-container{
   position: relative;
   display: flex;
+  flex: 1;
   flex-direction: column !important;
   justify-content: space-between;
-  min-height: 365px;
+  /* min-height: 900px; */
   background-color: rgb(255, 255, 255);
-  padding: 30px 0;
+  padding: 0 0 30px 0;
+}
+.main-container h1{
+  padding: 20px 0;
+  color: var(--white);
+  background: linear-gradient(180deg, #05225E 0%, #295591 100%);
 }
 
 
 /****** Page Title & Algolia Searchbox ******/
 .ais-SearchBox{
+  position: absolute;
+  top: 15px;
+  right: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -116,10 +149,9 @@ body{
   padding: 0 0 3px 0;
 }
 
-.ais-Hits{
-  background-color: var(--info);
-  padding: 1rem;
-  margin: 1rem;
+.hits-container{
+  width: 100%;
+  margin: 0 auto;
 }
 .ais-Hits-list{
   display: flex;
@@ -131,9 +163,10 @@ body{
   margin: 0 auto;
 }
 .ais-Hits-item{
-  margin: 1rem;
+  margin: 1rem auto !important;
   list-style-type: none;
   width: 100%;
+  min-width: 350px;
   max-width: 350px;
 }
 /* ol class="ais-Hits-list
@@ -211,20 +244,24 @@ body{
 }
   
 @media only screen and (min-width: 768px) {
-    .navbar{
-      /* background-color: purple !important; */
-    }
     .footer .slogan .slogan-text{
       max-width: 590px;
     }
 }
   
 @media only screen and (min-width: 992px) {
-    .navbar{
+    .navbar .navbar-nav{
+      background: transparent;  
+      margin: 0;
     }
-    .main-container{
-      min-height: 670px;
-      flex: 1;
+    .navbar .navbar-nav .nav-item{
+      margin: 0;
+      width: auto;
+      padding: 0;
+    }
+    .navbar .navbar-nav .nav-item .nav-link, .cart-icon{
+      color: inherit;
+      fill: var(--primary) !important
     }
     .footer{
       flex: 0;
@@ -238,15 +275,3 @@ body{
 }
 
 
-/* .ais-Hits{
-  
-}
-
-ol class="ais-Hits-list
-<li class="ais-Hits-item">
-<div class="hit product-card-container d-flex flex-wrap justify-content-around w-100 gap-3">
-<div class="card bg-dark col-12 col-lg-5"><div class="card-body text-white">
-<h4 class="card-title">Headphones</h4>
-<p class="card-text">Noise-cancelling headphones</p>
-<p class="card-text text-info fs-5">$199.99</p>
-<a class="btn btn-primary w-100 fw-semibold">ADD TO CART</a> */
