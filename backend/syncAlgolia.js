@@ -35,10 +35,11 @@ async function syncAlgolia() {
         return;
     }
 
-
+    /******** This is for Varient Level (single) Records **********
     // Check product attributes for correct form
     const records = products.map(p => {
 
+        
         // don't add product if attributes aren't correct
         if (!p || !p._id || !p.name || !p.price || !p.description) {
             console.warn(`Skipping malformed product:`, p);
@@ -53,8 +54,64 @@ async function syncAlgolia() {
             description: p.description,
             stock: p.stock
         };
+        
 
     }).filter(record => record !== null);
+    ***************************************************************/
+
+
+    const VARIANT_LEVEL_INDEXING = true;    // Toggle between variant or product level
+
+    let records = [];
+
+    if (VARIANT_LEVEL_INDEXING) {
+        // Variant-Level Records
+        records = products.flatMap(p => {
+            if (!p || !p._id || !Array.isArray(p.variants)) {
+                console.warn("Skipping malformed product or missing variants:", p);
+                return [];
+            }
+
+            return p.variants.map(v => {
+                if (!v || !v.name || !v.price) {
+                    console.warn("Skipping malformed variant:", v);
+                    return null;
+                }
+
+                return {
+                    objectID: `${p._id.toString()}-${v.name.replace(/\s+/g, '-')}`,
+                    name: v.name,
+                    price: v.price,
+                    stock: v.stock,
+                    description: p.description,
+                    brand: p.brand,
+                    categories: p.categories,
+                    imageURL: v.imageURL || [],
+                };
+            }).filter(v => v !== null);
+            
+        });
+    } else {
+        // Product-Level Records
+        records = products.map(p => {
+            if (!p || !p._id || !p.baseName || !p.description) {
+                console.warn(`Skipping malformed product:`, p);
+                return null;
+            }
+
+            return {
+                objectID: p._id.toString(),
+                baseName: p.baseName,
+                description: p.description,
+                brand: p.brand,
+                categories: p.categories,
+                price: p.variants?.[0]?.price || 0,
+                stock: p.variants?.[0]?.stock || 0,
+                imageURL: p.variants?.[0]?.imageURL || [],
+            };
+        }).filter(record => record !== null);
+    }
+
 
 
     console.log('Records prepared for Algolia. Count:', records.length);
