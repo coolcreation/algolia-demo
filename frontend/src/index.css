@@ -185,7 +185,10 @@ body{
 .main-container .product-card-container .card{
   max-width: 350px !important;
 }
-
+.card{
+  max-width: 350px !important;
+  min-height: 450px;
+}
 
 /****** FOOTER ******/
 .footer{

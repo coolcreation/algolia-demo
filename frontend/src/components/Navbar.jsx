@@ -49,7 +49,7 @@ export default function Navbar() {
 
                     <li className="nav-item ms-lg-auto me-lg-4">
 
-                        <Link className="nav-link link position-relative d-none" to="/admin">
+                        <Link className="nav-link link position-relative d-none" to="/adminHomePage">
                           <img src={'./admin-icon.png'} alt="" width="30"/>
                         </Link>
 

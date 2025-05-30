@@ -13,7 +13,7 @@ import ContactPage from './pages/ContactPage.jsx';
 import ProductPage from './pages/ProductPage.jsx'
 // Admin Pages
 import AdminProductsPage from './admin/pages/AdminProductsPage.jsx';
-import AdminHomePage from './admin/pages/AdminHomePage';
+import AdminHomePage from './admin/pages/AdminHomePage.jsx';
 
 
 function App() {
@@ -28,8 +28,8 @@ function App() {
         <Route path="/ContactPage" element={ <ContactPage /> }/>
         <Route path="/ProductPage" element={ <ProductPage /> }/>
 
-        <Route path="/adminHomePage" element={ <AdminHomePage /> }/>
-        <Route path="/adminProductPage" element={ <AdminProductsPage /> }/>
+        <Route path="/AdminHomePage" element={ <AdminHomePage /> }/>
+        <Route path="/AdminProductPage" element={ <AdminProductsPage /> }/>
         
       </Routes>  
     </>
