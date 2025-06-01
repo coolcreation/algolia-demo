@@ -43,4 +43,4 @@ const client = algoliasearch('YourAppID', 'search-only-key-from-backend');
 ---  
 ### Algolia Workflow  
 
-![Algolia Workflow](https://raw.githubusercontent.com/coolcreation/collab-enhanced/main/docs/images/algolia_workflow_created_with_mermaid.png)
+![Algolia Workflow](https://raw.githubusercontent.com/coolcreation/algolia-demo/main/docs/images/algolia_workflow_created_with_mermaid.png)
