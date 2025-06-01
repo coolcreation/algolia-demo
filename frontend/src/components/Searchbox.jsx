@@ -27,12 +27,17 @@ export default function Searchbox() {
     addToCart(id);
   };
 
+  // Show products for searches only, not propdcuts without a search
+  function ConditionalHits() {
+    const { query } = useSearchBox();
+    return query.trim().length > 0 ? <Hits hitComponent={HitCard} /> : null;
+  }
 
-  //  pseudo-variant detection logic
+    //  pseudo-variant detection logic
   function isTrueVariantProduct(hit) {
     const variants = hit.variants;
     if (!Array.isArray(variants)) return false;
-    return variants.length > 1;
+    return variants.length > 1;       // if we have only one then do something
   }
 
   function isPseudoVariant(hit) {
@@ -44,12 +49,6 @@ export default function Searchbox() {
     const nameMatches = variant.name?.toLowerCase().includes(hit.baseName?.toLowerCase());
 
     return nameMatches;
-  }
-
-  // Show products for searches only, not propdcuts without a search
-  function ConditionalHits() {
-    const { query } = useSearchBox();
-    return query.trim().length > 0 ? <Hits hitComponent={HitCard} /> : null;
   }
 
   // display the correct product card we need
@@ -66,7 +65,7 @@ export default function Searchbox() {
           hit={{ ...hit, ...hit.variants[0] }}
           productAdded={productAdded}
           handleProductAdded={handleProductAdded}
-      />;
+      />
     }
 
   }
@@ -75,7 +74,7 @@ export default function Searchbox() {
     <>
       <InstantSearch searchClient={searchClient} indexName="products">
         <SearchBox />
-         <ConditionalHits />
+        <ConditionalHits />
       </InstantSearch>
 
     </>

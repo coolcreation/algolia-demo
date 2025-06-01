@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 // context/CartContext.jsx
 import { createContext, useContext, useState } from 'react';
 
