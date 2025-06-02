@@ -7,7 +7,7 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const ALGOLIA_APPLICATION_ID = process.env.Application_ID
-const ALGOLIA_API_KEY = process.env.Write_API_Key
+const ALGOLIA_API_KEY = process.env.Admin_Key    // Write_API_Key
 
 const ALGOLIA_INDEX_NAME = "products"  // This is our Algolia index name we want to use
 
@@ -32,43 +32,6 @@ async function syncAlgolia() {
         console.error('Error fetching products from MongoDB:', error)
         return
     }
-
-
-    // flatMap() is like map(), but it flattens nested arrays: if one product has 3 variants, it returns 3 records at the same level in records
-    // const records = products.flatMap(product => {
-    // const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
-
-    // if (hasVariants) {
-    //     // Variant-Level (with parent info merged if needed) 
-    //     return product.variants.map(variant => ({
-    //         objectID: `${product._id.toString()}-${variant.sku}`, // unique per variant
-    //         baseName: product.baseName,
-    //         description: product.description,
-    //         brand: product.brand,
-    //         categories: product.categories,
-    //         tags: product.tags,
-    //         name: variant.name,
-    //         sku: variant.sku,
-    //         price: variant.price,
-    //         stock: variant.stock,
-    //         imageURL: variant.imageURL,
-    //     }));
-    // } else {
-    //     // Product-Level (parent only)
-    //     return [{
-    //         objectID: product._id.toString(),
-    //         baseName: product.baseName,
-    //         description: product.description,
-    //         brand: product.brand,
-    //         categories: product.categories,
-    //         tags: product.tags,
-    //         sku: product.sku,
-    //         price: product.price || 0,
-    //         stock: product.stock || 0,
-    //         imageURL: product.imageURL,
-    //     }];
-    // }
-    // });
 
     const records = products.map(product => ({
         objectID: product._id.toString(),
