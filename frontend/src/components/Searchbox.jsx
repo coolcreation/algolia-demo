@@ -1,7 +1,9 @@
 //  https://www.algolia.com/doc/guides/building-search-ui/getting-started/react/
 
 import { useState } from 'react'
-import { liteClient as algoliasearch } from 'algoliasearch/lite';
+// import { liteClient as algoliasearch } from 'algoliasearch/lite';
+import algoliasearch from 'algoliasearch/lite';
+
 import { InstantSearch, SearchBox, Hits } from 'react-instantsearch'
 import { useSearchBox } from 'react-instantsearch';  // Show products for searches only, not propdcuts without a search
 import { useCart } from '../context/CartContext';    // ContextAPI
